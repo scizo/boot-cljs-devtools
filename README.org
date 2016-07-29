@@ -10,11 +10,11 @@ In order to install it, add the following to your =build.boot= dependencies:
 #+BEGIN_SRC clojure
 [binaryage/devtools      "0.7.2" :scope "test"]
 [binaryage/dirac         "0.6.2" :scope "test"]
-[jupl/boot-cljs-devtools "0.X.X" :scope "test"]
+[powerlaces/boot-cljs-devtools "0.X.X" :scope "test"]
 #+END_SRC
 In addition require the task, specifically =cljs-devtools=.
 #+BEGIN_SRC clojure
-(require '[jupl.boot-cljs-devtools :refer [cljs-devtools])
+(require '[powerlaces.boot-cljs-devtools :refer [cljs-devtools])
 #+END_SRC
 Currently files may be generated in the =out= directory, so it would be advisable to add that to someplace like in a =.gitignore=.
 ** Usage
