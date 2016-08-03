@@ -70,9 +70,7 @@
             (format "Nrepl's :port (%s) and Dirac's [:nrepl-server :port] (%s) are not the same."
                     (:port nrepl-opts) (get-in dirac-opts [:nrepl-server :port])))
     (comp
-     (apply repl (mapcat identity nrepl-opts))
      (boot/with-pre-wrap fileset
-       @start-dirac-once
        (doseq [f (relevant-cljs-edn @prev fileset ids)]
          (let [path (boot/tmp-path f)
                in-file (boot/tmp-file f)
@@ -82,7 +80,10 @@
        (reset! prev fileset)
        (-> fileset
            (boot/add-resource tmp)
-           (boot/commit!))))))
+           (boot/commit!)))
+     (apply repl (mapcat identity nrepl-opts))
+     (boot/with-pass-thru _
+       @start-dirac-once))))
 
 (comment
   (require '[powerlaces.boot-cljs-devtools :as dvt])
