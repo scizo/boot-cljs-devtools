@@ -10,7 +10,7 @@
 (def ^:private deps '#{binaryage/devtools binaryage/dirac})
 
 (defn- add-preloads! [in-file out-file]
-  (let [preloads ['devtools.preload 'powerlaces.boot-cljs-devtools.dirac.preload]
+  (let [preloads ['devtools.preload 'powerlaces.boot-cljs-devtools.preload]
         spec (-> in-file slurp read-string)]
     (when (not= :nodejs (-> spec :compiler-options :target))
       (util/info
