@@ -7,9 +7,7 @@
             [clojure.string     :as    str]
             [dirac.agent.config :as    dirac-conf]))
 
-(def ^:private deps
-  '[[binaryage/devtools "0.8.0" :scope "test"]
-    [binaryage/dirac    "0.6.3" :scope "test"]])
+(def ^:private deps '#{binaryage/devtools binaryage/dirac})
 
 (defn- add-preloads! [in-file out-file]
   (let [preloads ['devtools.preload 'powerlaces.boot-cljs-devtools.dirac.preload]
@@ -28,7 +26,7 @@
   (let [current (->> (boot/get-env :dependencies)
                      (map first)
                      set)
-        missing (remove (comp current first) deps)]
+        missing (remove current deps)]
     (if (seq missing)
       (util/warn (str "You are missing necessary dependencies for boot-cljs-repl.\n"
                       "Please add the following dependencies to your project:\n"
