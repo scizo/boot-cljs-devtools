@@ -18,7 +18,7 @@
        preloads (.getName in-file))
       (io/make-parents out-file)
       (-> spec
-          (update-in [:preloads] #(into preloads %))
+          (update-in [:compiler-options :preloads] #(into preloads %))
           pr-str
           ((partial spit out-file))))))
 
