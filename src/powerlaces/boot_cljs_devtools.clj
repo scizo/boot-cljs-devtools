@@ -59,10 +59,12 @@
   (let [tmp (boot/tmp-dir!)
         prev (atom nil)
         nrepl-opts (cond-> (merge nrepl-defaults nrepl-opts)
-                     dirac-opts (assoc :port (get-in dirac-opts [:nrepl-server :port])))
+                     (get-in dirac-opts [:nrepl-server :port]) (assoc :port (get-in dirac-opts [:nrepl-server :port])))
         dirac-opts (cond-> (or dirac-opts {})
-                     nrepl-opts (assoc-in [:nrepl-server :port] (:port nrepl-opts)))
+                     (:port nrepl-opts) (assoc-in [:nrepl-server :port] (:port nrepl-opts)))
         start-dirac-once (delay (start-dirac! dirac-opts))]
+    (util/dbug "Normalized nrepl-opts %s\n" nrepl-opts)
+    (util/dbug "Normalize dirac-opts %s\n"dirac-opts)
     (assert-deps)
     (assert (= (:port nrepl-opts) (get-in dirac-opts [:nrepl-server :port]))
             (format "Nrepl's :port (%s) and Dirac's [:nrepl-server :port] (%s) are not the same."
