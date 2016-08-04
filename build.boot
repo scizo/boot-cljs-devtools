@@ -4,12 +4,12 @@
 
 (require '[adzerk.bootlaces :refer :all])
 
-(def +version+ "0.1.1")
+(def +version+ "0.1.1-SNAPSHOT")
 
 (bootlaces! +version+)
 
 (task-options!
- pom {:project     'powerlaces/boot-cljs-devtools
+ pom {:project     'org.clojars.scizo/boot-cljs-devtools
       :version     +version+
       :description "Boot task to add Chrome DevTool enhancements for CLJS."
       :url         "https://github.com/boot-clj/boot-cljs-devtools"
